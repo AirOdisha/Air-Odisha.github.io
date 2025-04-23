@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Odisha - Fleet and Flight Logging</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #0078d7;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+        .fleet {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .fleet-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .fleet-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .fleet-item h3 {
+            margin: 0.5rem 0;
+        }
+        button {
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 2rem;
+        }
+        button:hover {
+            background-color: #005a9e;
+        }
+        #flightLogSection {
+            display: none;
+            margin-top: 2rem;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        form div {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #flightDetails {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #flightDetails h2 {
+            margin-top: 0;
+        }
+        #flightCount {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Air Odisha</h1>
+    </header>
+    <main>
+        <p>We are proud to operate a modern and efficient fleet of aircraft.</p>
+        <div class="fleet">
+            <div class="fleet-item">
+                <h3>Boeing 737-800</h3>
+                <p>Capacity: 189 passengers</p>
+            </div>
+            <div class="fleet-item">
+                <h3>Airbus A320neo</h3>
+                <p>Capacity: 195 passengers</p>
+            </div>
+            <div class="fleet-item">
+                <h3>ATR 72-600</h3>
+                <p>Capacity: 70 passengers</p>
+            </div>
+            <div class="fleet-item">
+                <h3>Airbus A350-1000</h3>
+                <p>Capacity: 350-410 passengers</p>
+            </div>
+            <div class="fleet-item">
+                <h3>Boeing 787-9</h3>
+                <p>Capacity: 250-290 passengers</p>
+            </div>
+            <div class="fleet-item">
+                <h3>Boeing 787-10</h3>
+                <p>Capacity: 336 passengers</p>
+            </div>
+            <div class="fleet-item">
+                <h3>Airbus A350-900</h3>
+                <p>Capacity: 300-350 passengers</p>
+            </div>
+        </div>
+        <button onclick="showFlightLog()">Log a Flight</button>
+        <div id="flightLogSection">
+            <form id="flightLogForm">
+                <div>
+                    <label for="pilotName">Pilot Name</label>
+                    <input type="text" id="pilotName" name="pilotName" required>
+                </div>
+                <div>
+                    <label for="flightNumber">Flight Number</label>
+                    <input type="text" id="flightNumber" name="flightNumber" required>
+                </div>
+                <div>
+                    <label for="departure">Departure Airport</label>
+                    <input type="text" id="departure" name="departure" required>
+                </div>
+                <div>
+                    <label for="arrival">Arrival Airport</label>
+                    <input type="text" id="arrival" name="arrival" required>
+                </div>
+                <div>
+                    <label for="flightTime">Flight Time (hours)</label>
+                    <input type="number" id="flightTime" name="flightTime" step="0.1" required>
+                </div>
+                <div>
+                    <label for="remarks">Remarks</label>
+                    <textarea id="remarks" name="remarks" rows="4"></textarea>
+                </div>
+                <button type="submit">Submit Flight Log</button>
+            </form>
+            <div id="flightDetails" style="display: none;">
+                <h2>Flight Details</h2>
+                <p><strong>Pilot Name:</strong> <span id="displayPilotName"></span></p>
+                <p><strong>Flight Number:</strong> <span id="displayFlightNumber"></span></p>
+                <p><strong>Departure Airport:</strong> <span id="displayDeparture"></span></p>
+                <p><strong>Arrival Airport:</strong> <span id="displayArrival"></span></p>
+                <p><strong>Flight Time:</strong> <span id="displayFlightTime"></span> hours</p>
+                <p><strong>Remarks:</strong> <span id="displayRemarks"></span></p>
+            </div>
+        </div>
+    </main>
+    <script>
+        function showFlightLog() {
+            const flightLogSection = document.getElementById('flightLogSection');
+            flightLogSection.style.display = 'block'; // Show the flight logging section
+        }
+
+        let flightCount = 0;
+
+        document.getElementById('flightLogForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const pilotName = document.getElementById('pilotName').value;
+            const flightNumber = document.getElementById('flightNumber').value;
+            const departure = document.getElementById('departure').value;
+            const arrival = document.getElementById('arrival').value;
+            const flightTime = document.getElementById('flightTime').value;
+            const remarks = document.getElementById('remarks').value;
+
+            // Display flight details
+            document.getElementById('displayPilotName').textContent = pilotName;
+            document.getElementById('displayFlightNumber').textContent = flightNumber;
+            document.getElementById('displayDeparture').textContent = departure;
+            document.getElementById('displayArrival').textContent = arrival;
+            document.getElementById('displayFlightTime').textContent = flightTime;
+            document.getElementById('displayRemarks').textContent = remarks;
+
+            // Increment and display flight count
+            flightCount++;
+            const flightCountElement = document.getElementById('flightCount');
+            if (!flightCountElement) {
+                const countDiv = document.createElement('div');
+                countDiv.id = 'flightCount';
+                countDiv.style.marginTop = '1rem';
+                countDiv.style.fontSize = '1.2rem';
+                countDiv.style.color = '#333';
+                countDiv.textContent = `Flights Logged: ${flightCount}`;
+                document.querySelector('main').appendChild(countDiv);
+            } else {
+                flightCountElement.textContent = `Flights Logged: ${flightCount}`;
+            }
+
+            // Show the flight details section
+            document.getElementById('flightDetails').style.display = 'block';
+
+            // Reset the form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
