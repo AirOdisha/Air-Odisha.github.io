@@ -3,13 +3,13 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #4f4fdb;
+    background-color: #292828;
 }
 
 /* Header */
 header {
     background-color: #2b3136;
-    background: linear-gradient(to right, purple, red, rgb(0, 0, 255));
+    background: linear-gradient(to right, rgb(200, 12, 200), rgb(234, 10, 10), rgb(25, 95, 217));
     padding: 1rem;
     text-align: center;
 }
