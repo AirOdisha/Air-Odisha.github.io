@@ -3,24 +3,17 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ad3131;
+    background-color: #ff0000;
 }
 
 /* Header */
 header {
-    background-color: #2b3136; /* Solid background for the header */
+    background-color: #2b3136;
+    background: linear-gradient(to right, rgb(200, 12, 200), rgb(234, 10, 10), rgb(25, 95, 217));
     padding: 1rem;
     text-align: center;
 }
 
-header h1 {
-    font-size: 2rem;
-    background: linear-gradient(to right, rgb(200, 12, 200), rgb(234, 10, 10), rgb(25, 95, 217));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-}
 /* Main Content */
 main {
     padding: 2rem;
