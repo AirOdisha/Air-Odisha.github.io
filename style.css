@@ -50,7 +50,7 @@ main {
 
 /* Button */
 button {
-    background-color: #de2e2e;
+    background-color: #ADD8E6;
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -61,7 +61,7 @@ button {
 }
 
 button:hover {
-    background-color: #005a9e;
+    background-color: #ADD8E6;
 }
 
 /* Flight Logging Section */
@@ -74,7 +74,7 @@ button:hover {
 form {
     max-width: 600px;
     margin: 0 auto;
-    background: rgb(103, 91, 229);
+    background: rgb(0, 128, 0);
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
